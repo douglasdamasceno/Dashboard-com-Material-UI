@@ -2,16 +2,43 @@ import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, List
 import { Box } from '@mui/system';
 import {ReactNode} from 'react';
 import { useDrawerContext } from '../../contexts';
-
+import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 interface IProps {
     children:ReactNode;
  }
- 
+
+interface IListItemLinkProps {
+  label:string;
+  icon:string;
+  to:string;
+  onClick?:()=>void;
+}
+const ListItemLink : React.FC<IListItemLinkProps> = 
+  ({icon,label,to,onClick})=>{
+  
+  const navigate = useNavigate();  
+  const resolvedPath = useResolvedPath(to); 
+  const match = useMatch({path:resolvedPath.pathname,end:false});
+  const handleClick = ()=>{
+    onClick?.();
+    navigate(to);
+  }
+
+  return(  
+    <ListItemButton selected={!!match} onClick={handleClick}>
+      <ListItemIcon>
+        <Icon >{icon}</Icon>
+      </ListItemIcon>
+      <ListItemText primary={label} />
+    </ListItemButton>
+  )
+}
+
 export function SideMenu({children}:IProps)  {
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   
-  const {isDrawerOpen,toggleDrawerOpen} = useDrawerContext();
+  const {isDrawerOpen,toggleDrawerOpen,drawerOptions} = useDrawerContext();
 
   return (
       <>
@@ -43,12 +70,15 @@ export function SideMenu({children}:IProps)  {
             
             <Box flex={1}>
               <List component="nav">
-                <ListItemButton>
-                  <ListItemIcon>
-                    <Icon >home</Icon>
-                  </ListItemIcon>
-                  <ListItemText primary="Página inicial" />
-                </ListItemButton>
+              {drawerOptions.map(drawerOption=>(
+                <ListItemLink
+                  key={drawerOption.path}
+                  icon={drawerOption.icon}
+                  to={drawerOption.path}
+                  label={drawerOption.label}
+                  onClick={isSmDown ? toggleDrawerOpen:undefined}
+                  />
+                ))}
               </List>
             </Box>
           </Box>
