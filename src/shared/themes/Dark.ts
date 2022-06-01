@@ -16,7 +16,7 @@ export const DarkTheme = createTheme({
         },
         background:{
             default:'#303134',
-            paper:'#f7f6f3',
+            paper:'#3a3a3a',
         }
     }
 });
