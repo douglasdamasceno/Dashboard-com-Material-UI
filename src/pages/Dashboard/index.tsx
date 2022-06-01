@@ -3,7 +3,7 @@ import {LayoutBasePage} from '../../shared/layouts';
 
 export const Dashboard: React.FC = () => {
   return (
-      <LayoutBasePage title='Novo' >
+      <LayoutBasePage title='Página Inicial' >
           Testando
       </LayoutBasePage>
 
