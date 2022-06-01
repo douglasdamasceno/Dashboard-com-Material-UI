@@ -6,8 +6,9 @@ import { useDrawerContext } from '../contexts';
 interface ILayoutBasePageProps {
     title: string;
     children: React.ReactNode;
+    toolbar?: React.ReactNode;
 }
-export const LayoutBasePage: React.FC<ILayoutBasePageProps> = ({children,title}) => {
+export const LayoutBasePage: React.FC<ILayoutBasePageProps> = ({children,title,toolbar}) => {
     
     const isSmDown = useMediaQuery((theme:Theme)=>theme.breakpoints.down('sm'));
     const theme = useTheme();
@@ -27,9 +28,13 @@ export const LayoutBasePage: React.FC<ILayoutBasePageProps> = ({children,title})
             {title}
         </Typography>
         </Box>
-        <Box>
-            Barra de Ferramentas
-        </Box>
+        {
+            toolbar &&(
+                <Box>
+                    {toolbar}
+                </Box>
+            )
+        }
         <Box>
             {children}
         </Box>
