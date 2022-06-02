@@ -1,7 +1,7 @@
 import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import {ReactNode} from 'react';
-import { useDrawerContext } from '../../contexts';
+import { useDrawerContext,useAppThemeContext } from '../../contexts';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 interface IProps {
     children:ReactNode;
@@ -38,6 +38,7 @@ export function SideMenu({children}:IProps)  {
   const theme = useTheme();
   const isSmDown = useMediaQuery(theme.breakpoints.down('sm'));
   
+  const {toggleTheme} = useAppThemeContext();
   const {isDrawerOpen,toggleDrawerOpen,drawerOptions} = useDrawerContext();
 
   return (
@@ -79,6 +80,16 @@ export function SideMenu({children}:IProps)  {
                   onClick={isSmDown ? toggleDrawerOpen:undefined}
                   />
                 ))}
+              </List>
+            </Box>
+            <Box>
+              <List component="nav">
+              <ListItemButton  onClick={toggleTheme}>
+                <ListItemIcon>
+                  <Icon>dark_mode</Icon>
+                </ListItemIcon>
+                <ListItemText primary="Alterar Tema" />
+              </ListItemButton>
               </List>
             </Box>
           </Box>
