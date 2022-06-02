@@ -6,7 +6,7 @@ export const Dashboard: React.FC = () => {
   return (
       <LayoutBasePage 
         title='Página Inicial' 
-        toolbar={<DetailTool isSaveAndBackButtonVisible />} 
+        toolbar={<DetailTool isSaveAndBackButtonVisible isSaveAndBackButtonLoading />} 
         
         >
           Testando....

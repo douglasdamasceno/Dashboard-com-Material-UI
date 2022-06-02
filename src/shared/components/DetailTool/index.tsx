@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Icon, Paper,useTheme } from '@mui/material';
+import { Box, Button, Divider, Icon, Paper,Skeleton,useTheme } from '@mui/material';
 import React from 'react';
 
 
@@ -10,6 +10,12 @@ interface IListToolProps{
     isDeleteButtonVisible?:boolean;
     isSaveButtonVisible?:boolean;
     isSaveAndBackButtonVisible?:boolean;
+    
+    isNewButtonLoading?:boolean;
+    isBackButtonLoading?:boolean;
+    isDeleteButtonLoading?:boolean;
+    isSaveButtonLoading?:boolean;
+    isSaveAndBackButtonLoading?:boolean;
 
     onNewButtonClick?:()=>void;
     onBackButtonClick?:()=>void;
@@ -26,6 +32,12 @@ export function DetailTool ({
     isDeleteButtonVisible = true,
     isSaveButtonVisible = true,
     isSaveAndBackButtonVisible = false,
+    
+    isNewButtonLoading = false,
+    isBackButtonLoading = false,
+    isDeleteButtonLoading = false,
+    isSaveButtonLoading = false,
+    isSaveAndBackButtonLoading = false,
 
     onNewButtonClick,
     onBackButtonClick,
@@ -47,7 +59,7 @@ export function DetailTool ({
         gap={1}
     >
         {
-            isSaveButtonVisible &&
+            (isSaveButtonVisible && !isSaveButtonLoading) &&
             <Button
                 color='primary'
                 disableElevation
@@ -58,8 +70,13 @@ export function DetailTool ({
                 Salvar
             </Button>
         }
+        
+        {
+            isSaveButtonLoading && 
+            <Skeleton width={110} height={60} />
+        }
          {
-            isSaveAndBackButtonVisible &&
+            (isSaveAndBackButtonVisible && !isSaveAndBackButtonLoading) &&
             <Button
                 color='primary'
                 disableElevation
@@ -70,8 +87,12 @@ export function DetailTool ({
                 Salvar e voltar
             </Button>
         }
+         {
+             isSaveAndBackButtonLoading && 
+             <Skeleton width={180} height={60} />
+         }
         {
-            isDeleteButtonVisible &&
+            (isDeleteButtonVisible && !isDeleteButtonLoading) &&
             <Button
                 color='primary'
                 disableElevation
@@ -82,32 +103,44 @@ export function DetailTool ({
                 Apagar
             </Button>
         }
+         {
+             isDeleteButtonLoading && 
+             <Skeleton width={110} height={60} />
+         }
 
-    {
-        isNewButtonVisible &&
-        <Button
-            color='primary'
-            disableElevation
-            variant='outlined'
-            startIcon={<Icon>add</Icon>}
-            onClick={onNewButtonClick}
-            >
-        {newButtonText}
-    </Button>
-    }
-    <Divider variant="middle" orientation='vertical' />
-    {
-        isBackButtonVisible &&
-        <Button
-            color='primary'
-            disableElevation
-            variant='outlined'
-            startIcon={<Icon>arrow_back</Icon>}
-            onClick={onBackButtonClick}
-            >
-        Voltar
-        </Button>
-    }
+        {
+            (isNewButtonVisible && !isNewButtonLoading) &&
+            <Button
+                color='primary'
+                disableElevation
+                variant='outlined'
+                startIcon={<Icon>add</Icon>}
+                onClick={onNewButtonClick}
+                >
+                {newButtonText}
+             </Button>
+        }
+         {
+             isNewButtonLoading && 
+             <Skeleton width={110} height={60} />
+         }
+        <Divider variant="middle" orientation='vertical' />
+        {
+            (isBackButtonVisible && !isBackButtonLoading) &&
+            <Button
+                color='primary'
+                disableElevation
+                variant='outlined'
+                startIcon={<Icon>arrow_back</Icon>}
+                onClick={onBackButtonClick}
+                >
+            Voltar
+            </Button>
+        }
+        {
+            isBackButtonLoading && 
+            <Skeleton width={110} height={60} />
+        }
     </Box>
   );
 }
