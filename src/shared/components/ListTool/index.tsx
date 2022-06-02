@@ -1,7 +1,7 @@
 import { Box, Button, useTheme, Paper, TextField, Icon } from '@mui/material';
 
 interface IListToolProps{
-    search?:string;
+    searchText?:string;
     isSearchInputVisible?:boolean;
     onSearchTextChange?:(newText:string)=>void;
     
@@ -12,7 +12,7 @@ interface IListToolProps{
 }
 
 export function ListTool({
-    search,isSearchInputVisible,onSearchTextChange,
+    searchText,isSearchInputVisible,onSearchTextChange,
     newButtonText = 'Novo',isNewButtonVisible,onNewButtonClick
 }:IListToolProps) {
     const theme = useTheme();
@@ -33,7 +33,7 @@ export function ListTool({
                 <TextField 
                     size='small'
                     placeholder='Pesquisar'
-                    value={search}
+                    value={searchText}
                     onChange={(e)=> onSearchTextChange?.(e.target.value)}
                 />
             }
