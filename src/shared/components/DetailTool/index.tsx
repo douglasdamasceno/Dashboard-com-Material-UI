@@ -1,5 +1,4 @@
-import { Box, Button, Divider, Icon, Paper,Skeleton,useTheme } from '@mui/material';
-import React from 'react';
+import { Box, Button, Divider, Icon, Paper,Skeleton,Theme,Typography,useMediaQuery,useTheme } from '@mui/material';
 
 
 interface IListToolProps{
@@ -46,7 +45,10 @@ export function DetailTool ({
     onSaveAndBackButtonClick,
 
 }:IListToolProps) {
+    const isSmDown = useMediaQuery((theme:Theme)=>theme.breakpoints.down('sm'));
     const theme = useTheme();
+    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box 
         display='flex'
@@ -67,7 +69,14 @@ export function DetailTool ({
                 startIcon={<Icon>save</Icon>}
                 onClick={onSaveButtonClick}
             >
-                Salvar
+                <Typography 
+                    variant='button'
+                    whiteSpace="nowrap"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                >
+                    Salvar
+                </Typography>
             </Button>
         }
         
@@ -76,7 +85,7 @@ export function DetailTool ({
             <Skeleton width={110} height={60} />
         }
          {
-            (isSaveAndBackButtonVisible && !isSaveAndBackButtonLoading) &&
+            (isSaveAndBackButtonVisible && !isSaveAndBackButtonLoading && !isSmDown && !isMdDown) &&
             <Button
                 color='primary'
                 disableElevation
@@ -84,11 +93,18 @@ export function DetailTool ({
                 startIcon={<Icon>save</Icon>}
                 onClick={onSaveAndBackButtonClick}
             >
-                Salvar e voltar
+                <Typography 
+                    variant='button'
+                    whiteSpace="nowrap"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                >
+                    Salvar e voltar
+                </Typography>
             </Button>
         }
          {
-             isSaveAndBackButtonLoading && 
+             (isSaveAndBackButtonLoading && !isSmDown && !isMdDown) && 
              <Skeleton width={180} height={60} />
          }
         {
@@ -100,7 +116,14 @@ export function DetailTool ({
                 startIcon={<Icon>delete</Icon>}
                 onClick={onDeleteButtonClick}
                 >
-                Apagar
+                <Typography 
+                    variant='button'
+                    whiteSpace="nowrap"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                >
+                    Apagar
+                </Typography>    
             </Button>
         }
          {
@@ -109,7 +132,7 @@ export function DetailTool ({
          }
 
         {
-            (isNewButtonVisible && !isNewButtonLoading) &&
+            (isNewButtonVisible && !isNewButtonLoading && !isSmDown) &&
             <Button
                 color='primary'
                 disableElevation
@@ -117,14 +140,29 @@ export function DetailTool ({
                 startIcon={<Icon>add</Icon>}
                 onClick={onNewButtonClick}
                 >
-                {newButtonText}
+                <Typography 
+                    variant='button'
+                    whiteSpace="nowrap"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                >
+                    {newButtonText}
+                </Typography>
              </Button>
         }
          {
-             isNewButtonLoading && 
+             (isNewButtonLoading && !isSmDown) && 
              <Skeleton width={110} height={60} />
          }
-        <Divider variant="middle" orientation='vertical' />
+        {
+            (isBackButtonVisible && (
+                isNewButtonVisible ||
+                isDeleteButtonVisible ||
+                isSaveButtonVisible ||
+                isSaveAndBackButtonVisible
+            )) &&
+            <Divider variant="middle" orientation='vertical' />
+        } 
         {
             (isBackButtonVisible && !isBackButtonLoading) &&
             <Button
@@ -134,7 +172,14 @@ export function DetailTool ({
                 startIcon={<Icon>arrow_back</Icon>}
                 onClick={onBackButtonClick}
                 >
-            Voltar
+                <Typography 
+                    variant='button'
+                    whiteSpace="nowrap"
+                    textOverflow="ellipsis"
+                    overflow="hidden"
+                >
+                    Voltar
+                </Typography>
             </Button>
         }
         {
