@@ -1,12 +1,12 @@
 import React from 'react';
-import { Toolbar } from '../../shared/components';
+import { ListTool } from '../../shared/components';
 import {LayoutBasePage} from '../../shared/layouts';
 
 export const Dashboard: React.FC = () => {
   return (
       <LayoutBasePage 
         title='Página Inicial' 
-        toolbar={<Toolbar isSearchInputVisible isNewButtonVisible />} >
+        toolbar={<ListTool isSearchInputVisible isNewButtonVisible />} >
           Testando....
       </LayoutBasePage>
 

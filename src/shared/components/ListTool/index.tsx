@@ -1,6 +1,6 @@
 import { Box, Button, useTheme, Paper, TextField, Icon } from '@mui/material';
 
-interface IToolbarProps{
+interface IListToolProps{
     search?:string;
     isSearchInputVisible?:boolean;
     onSearchTextChange?:(newText:string)=>void;
@@ -11,10 +11,10 @@ interface IToolbarProps{
 
 }
 
-export function Toolbar({
+export function ListTool({
     search,isSearchInputVisible,onSearchTextChange,
     newButtonText = 'Novo',isNewButtonVisible,onNewButtonClick
-}:IToolbarProps) {
+}:IListToolProps) {
     const theme = useTheme();
     return (
         <Box 
