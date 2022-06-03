@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo } from 'react';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,TableFooter,LinearProgress } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 
 import { PersonService,IPerson } from '../../shared/services/api/PersonService';
 import { ListTool } from '../../shared/components';
 import { useDebounce } from '../../shared/hooks';
 import { LayoutBasePage } from '../../shared/layouts';
-import { TableRows } from '@mui/icons-material';
+import {Environment} from '../../shared/environment';
 
 export const Persons: React.FC = () => {
     const [searchParams,setSearchParams] = useSearchParams();
@@ -69,6 +69,20 @@ export const Persons: React.FC = () => {
                             </TableRow>
                         ))}
                    </TableBody>
+                   {totalCount===0 && !isLoading && (
+                       <caption>{Environment.LISTAGEM_VAZIA}</caption>
+                   )}
+                   <TableFooter>
+                       {
+                            isLoading && (
+                            <TableRow>
+                                    <TableCell colSpan={3}> 
+                                        <LinearProgress variant='indeterminate' />
+                                    </TableCell>
+                            </TableRow>
+                            )
+                       }
+                   </TableFooter>
                </Table>
            </TableContainer>
         </LayoutBasePage>
