@@ -14,19 +14,19 @@
         },
         {
             "id":2,
-            "nome":"Glaucio",
+            "name":"Glaucio",
             "email":"glaucio@gmail.com",
             "cityId":25
         },
         {   
             "id":3,
-            "nome":"Maria",
+            "name":"Maria",
             "email":"maria@gmail.com",
             "cityId":30
         },
         {   
             "id":4,
-            "nome":"Douglas",
+            "name":"Douglas",
             "email":"douglas@gmail.com",
             "cityId":17
         }
