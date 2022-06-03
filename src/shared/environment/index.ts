@@ -2,7 +2,7 @@ export const Environment = {
     /**
      * Define a quantidade de linhas a ser carregada por padrão na listagem.
      */
-    LIMITE_DE_LINHAS :10,
+    LIMITE_DE_LINHAS :5,
     /**
      * Texto exibido quando não há dados para exibir na listagem.
      */
