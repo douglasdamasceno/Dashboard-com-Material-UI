@@ -18,17 +18,17 @@ interface IPersonDetails{
 
 type TPersonWithCount = {
     data:IPerson[];
-    countTotal:number;
+    totalCount:number;
 }
 
 const getAll = async (page=1,filter=''):Promise<TPersonWithCount | Error> => {
     try {
-        const urlRelative = `/pessoas_page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&name_like=${filter}`;
+        const urlRelative = `/pessoas?_page=${page}&limit=${Environment.LIMITE_DE_LINHAS}&name_like=${filter}`;
         const {data,headers} = await Api.get(urlRelative);
         if(data){
             return {
                 data,
-                countTotal: Number(headers['x-total-count']) || Environment.LIMITE_DE_LINHAS,
+                totalCount: Number(headers['x-total-count']) || Environment.LIMITE_DE_LINHAS,
             }
         }
         return new Error("Erro ao buscar pessoas");

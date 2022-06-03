@@ -6,7 +6,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "mock": "npx json-server -w p3333 ./mock/database.json",
+    "mock": "npx json-server -w -p 3333 ./mock/database.json",
     "eject": "react-scripts eject"
   },
   "dependencies": {
