@@ -8,19 +8,19 @@ interface IListToolProps{
     isBackButtonVisible?:boolean;
     isDeleteButtonVisible?:boolean;
     isSaveButtonVisible?:boolean;
-    isSaveAndBackButtonVisible?:boolean;
+    isSaveAndCloseButtonVisible?:boolean;
     
     isNewButtonLoading?:boolean;
     isBackButtonLoading?:boolean;
     isDeleteButtonLoading?:boolean;
     isSaveButtonLoading?:boolean;
-    isSaveAndBackButtonLoading?:boolean;
+    isSaveAndCloseButtonLoading?:boolean;
 
     onNewButtonClick?:()=>void;
     onBackButtonClick?:()=>void;
     onDeleteButtonClick?:()=>void;
     onSaveButtonClick?:()=>void;
-    onSaveAndBackButtonClick?:()=>void;
+    onSaveAndCloseButtonClick?:()=>void;
 }
 
 export function DetailTool ({
@@ -30,19 +30,19 @@ export function DetailTool ({
     isBackButtonVisible = true,
     isDeleteButtonVisible = true,
     isSaveButtonVisible = true,
-    isSaveAndBackButtonVisible = false,
+    isSaveAndCloseButtonVisible = false,
     
     isNewButtonLoading = false,
     isBackButtonLoading = false,
     isDeleteButtonLoading = false,
     isSaveButtonLoading = false,
-    isSaveAndBackButtonLoading = false,
+    isSaveAndCloseButtonLoading = false,
 
     onNewButtonClick,
     onBackButtonClick,
     onDeleteButtonClick,
     onSaveButtonClick,
-    onSaveAndBackButtonClick,
+    onSaveAndCloseButtonClick: onSaveAndBackButtonClick,
 
 }:IListToolProps) {
     const isSmDown = useMediaQuery((theme:Theme)=>theme.breakpoints.down('sm'));
@@ -85,7 +85,7 @@ export function DetailTool ({
             <Skeleton width={110} height={60} />
         }
          {
-            (isSaveAndBackButtonVisible && !isSaveAndBackButtonLoading && !isSmDown && !isMdDown) &&
+            (isSaveAndCloseButtonVisible && !isSaveAndCloseButtonLoading && !isSmDown && !isMdDown) &&
             <Button
                 color='primary'
                 disableElevation
@@ -99,12 +99,12 @@ export function DetailTool ({
                     textOverflow="ellipsis"
                     overflow="hidden"
                 >
-                    Salvar e voltar
+                    Salvar e Fechar
                 </Typography>
             </Button>
         }
          {
-             (isSaveAndBackButtonLoading && !isSmDown && !isMdDown) && 
+             (isSaveAndCloseButtonLoading && !isSmDown && !isMdDown) && 
              <Skeleton width={180} height={60} />
          }
         {
@@ -159,7 +159,7 @@ export function DetailTool ({
                 isNewButtonVisible ||
                 isDeleteButtonVisible ||
                 isSaveButtonVisible ||
-                isSaveAndBackButtonVisible
+                isSaveAndCloseButtonVisible
             )) &&
             <Divider variant="middle" orientation='vertical' />
         } 
