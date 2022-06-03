@@ -47,7 +47,7 @@ export const Persons: React.FC = () => {
     },[search,page]);
 
     const handleDelete = (id:number)=>{
-        if(window.confirm('Are you sure?')){
+        if(window.confirm('Realmente deseja apagar ?')){
             PersonService.deleteById(id)
                 .then(result=>{
                     if(result instanceof Error){
@@ -70,6 +70,7 @@ export const Persons: React.FC = () => {
                 isSearchInputVisible 
                 isNewButtonVisible 
                 searchText={search}
+                onNewButtonClick={()=>navigate('/pessoas/nova')}
                 onSearchTextChange={(newText)=> setSearchParams({search:newText,page:'1'},{replace:true})}
             />} 
         >
@@ -88,7 +89,7 @@ export const Persons: React.FC = () => {
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.email}</TableCell>
                                 <TableCell>
-                                    <IconButton size='small' onClick={()=> navigate(`pessoas/detalhe/${row.id}`)}>
+                                    <IconButton size='small' onClick={()=> navigate(`detalhe/${row.id}`)}>
                                         <Icon>edit</Icon>
                                     </IconButton>
                                     <IconButton size='small' onClick={()=> handleDelete(row.id)}>
