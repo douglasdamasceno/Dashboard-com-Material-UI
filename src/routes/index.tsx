@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {useDrawerContext} from '../shared/contexts';
 import { useEffect } from "react";
-import { Dashboard } from "../pages";
+import { Cities, Dashboard } from "../pages";
 
 export default function AppRoute(){
     const {setDrawerOptions} = useDrawerContext();
@@ -14,9 +14,9 @@ export default function AppRoute(){
                 path:'/pagina-inicial',
             },
             {
-                label:'star',
-                icon:'start',
-                path:'/aa',
+                label:'Cidades',
+                icon:'location_city',
+                path:'/cidades',
             },
         ]);
     },[]);
@@ -25,6 +25,9 @@ export default function AppRoute(){
         
         <Routes>
             <Route path="/pagina-inicial" element={<Dashboard />}/>
+            <Route path="/cidades" element={<Cities />}/>
+            {/* <Route path="/cidades/detalhe/:id" element={<Cities />}/> */}
+            <Route path="*" element={<Dashboard />}/>
         </Routes>
     )
 };

@@ -16,6 +16,7 @@ export function ListTool({
     newButtonText = 'Novo',isNewButtonVisible,onNewButtonClick
 }:IListToolProps) {
     const theme = useTheme();
+   
     return (
         <Box 
             display='flex'
