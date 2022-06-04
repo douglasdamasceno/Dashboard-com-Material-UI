@@ -1,11 +1,10 @@
 import { LinearProgress,Box, Paper,Grid, Typography } from '@mui/material';
 import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { DetailTool } from '../../shared/components';
-import { VTextField } from '../../shared/components/forms/VTextField';
+import { VTextField,VForm, VFormHandles } from '../../shared/components/forms';
 import { LayoutBasePage } from '../../shared/layouts';
 import { PersonService } from '../../shared/services/api/PersonService';
 
@@ -18,7 +17,7 @@ interface IFormData {
 
 export const PersonDetails: React.FC = () => {
     
-    const formRef = useRef<FormHandles>(null);
+    const formRef = useRef<VFormHandles>(null);
 
     const {id ='nova'} = useParams<'id'>();
     const navigate = useNavigate();
@@ -81,6 +80,8 @@ export const PersonDetails: React.FC = () => {
             }).finally(()=>{
                 setIsLoading(false);
             });
+        }else{
+            formRef.current?.setData({name:'',email:'',cityId:''});
         }
     },[id]);
 
@@ -103,7 +104,7 @@ export const PersonDetails: React.FC = () => {
             }
             >
             
-            <Form ref={formRef} onSubmit={handleSave}>
+            <VForm ref={formRef} onSubmit={handleSave}>
                 <Box margin={1} display='flex' flexDirection='column' component={Paper} variant='outlined'> 
                     <Grid container direction="column" padding={2} spacing={2}>
                         {
@@ -160,7 +161,7 @@ export const PersonDetails: React.FC = () => {
                         </Grid>
                     </Grid>
                 </Box>
-            </Form>
+            </VForm>
         </LayoutBasePage>
     );
 }

@@ -1,0 +1,1 @@
+export  type { FormHandles as VFormHandles} from "@unform/core";
