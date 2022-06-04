@@ -1,11 +1,24 @@
 import { LinearProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { DetailTool } from '../../shared/components';
+import { VTextField } from '../../shared/components/forms/VTextField';
 import { LayoutBasePage } from '../../shared/layouts';
 import { PersonService } from '../../shared/services/api/PersonService';
 
+
+interface IFormData {
+    name: string;
+    email: string;
+    cityId: number;
+}
+
 export const PersonDetails: React.FC = () => {
+    
+    const formRef = useRef<FormHandles>(null);
+
     const {id ='nova'} = useParams<'id'>();
     const navigate = useNavigate();
     const [isLoading,setIsLoading] = useState(false);
@@ -26,8 +39,8 @@ export const PersonDetails: React.FC = () => {
                 });
         }
     }
-    const handleSave = () => {
-        console.log('save');
+    const handleSave = (dados:IFormData) => {
+        console.log('save',dados);
     }
 
     useEffect(() => {
@@ -60,14 +73,19 @@ export const PersonDetails: React.FC = () => {
 
                     onBackButtonClick={()=> navigate('/pessoas')}
                     onNewButtonClick={()=> navigate('/pessoas/nova')}
-                    onSaveAndCloseButtonClick={()=>{}}
                     onDeleteButtonClick={()=> handleDelete(Number(id))}
-                    onSaveButtonClick={()=> handleSave()}
+                    onSaveButtonClick={()=> formRef.current?.submitForm()}
+                    onSaveAndCloseButtonClick={()=> formRef.current?.submitForm()}
                 />
             }
             >
-             {isLoading && <LinearProgress variant='indeterminate' />}   
-            <div>PersonDetails {id}</div>
+            {isLoading && <LinearProgress variant='indeterminate' />}   
+            <Form ref={formRef} onSubmit={handleSave}>
+                <VTextField name='name' />
+                <VTextField name='email' />
+                <VTextField name='cityId' />
+
+            </Form>
         </LayoutBasePage>
     );
 }
