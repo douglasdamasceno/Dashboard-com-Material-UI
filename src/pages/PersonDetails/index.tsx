@@ -1,10 +1,9 @@
 import { LinearProgress,Box, Paper,Grid, Typography } from '@mui/material';
-import { FormHandles } from '@unform/core';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { DetailTool } from '../../shared/components';
-import { VTextField,VForm, VFormHandles } from '../../shared/components/forms';
+import { VTextField,VForm, useVForm } from '../../shared/components/forms';
 import { LayoutBasePage } from '../../shared/layouts';
 import { PersonService } from '../../shared/services/api/PersonService';
 
@@ -17,7 +16,7 @@ interface IFormData {
 
 export const PersonDetails: React.FC = () => {
     
-    const formRef = useRef<VFormHandles>(null);
+    const {formRef} = useVForm();
 
     const {id ='nova'} = useParams<'id'>();
     const navigate = useNavigate();

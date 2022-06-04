@@ -1,3 +1,3 @@
 export * from "./VTextField";
 export * from "./VForm";
-export * from "./VFormHandles";
+export * from "./useVForm";
