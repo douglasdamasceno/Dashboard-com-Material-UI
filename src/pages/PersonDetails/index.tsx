@@ -40,7 +40,29 @@ export const PersonDetails: React.FC = () => {
         }
     }
     const handleSave = (dados:IFormData) => {
-        console.log('save',dados);
+        setIsLoading(true);
+       if(id==='nova'){
+            PersonService.create(dados)
+                .then(result=>{
+                    if(result instanceof Error){
+                        alert(result.message);
+                    }else{
+                        alert('Created');
+                        navigate(`/pessoas/detalhe/${result}`);
+                    }
+                }).finally(()=>setIsLoading(false));
+       }else{
+            setIsLoading(true);
+            PersonService.updateById(Number(id),{id:Number(id),...dados})
+                .then(result=>{
+                    if(result instanceof Error){
+                        alert(result.message);
+                    }else{
+                        alert('Updated');
+                        navigate('/pessoas');
+                    }
+                }).finally(()=>setIsLoading(false));
+       }
     }
 
     useEffect(() => {
@@ -52,8 +74,8 @@ export const PersonDetails: React.FC = () => {
                     alert(result.message);
                     navigate('/pessoas');
                 }else{
-                    console.log(result);
                     setPersonsName(result.name);
+                    formRef.current?.setData(result);
                 }
             }).finally(()=>{
                 setIsLoading(false);
@@ -81,9 +103,9 @@ export const PersonDetails: React.FC = () => {
             >
             {isLoading && <LinearProgress variant='indeterminate' />}   
             <Form ref={formRef} onSubmit={handleSave}>
-                <VTextField name='name' />
-                <VTextField name='email' />
-                <VTextField name='cityId' />
+                <VTextField placeholder='Nome' name='name' />
+                <VTextField placeholder='Email' name='email' />
+                <VTextField placeholder='Cidade id' name='cityId' />
 
             </Form>
         </LayoutBasePage>
