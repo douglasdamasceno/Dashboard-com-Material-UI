@@ -23,12 +23,12 @@ type TPersonWithCount = {
 
 const getAll = async (page=1,filter=''):Promise<TPersonWithCount | Error> => {
     try {
-        const urlRelative = `/pessoas?_page=${page}&_limit=${Environment.LIMITE_DE_LINHAS}&name_like=${filter}`;
+        const urlRelative = `/pessoas?_page=${page}&_limit=${Environment.ROWS_LIMIT }&name_like=${filter}`;
         const {data,headers} = await Api.get(urlRelative);
         if(data){
             return {
                 data,
-                totalCount: Number(headers['x-total-count'] || Environment.LIMITE_DE_LINHAS),
+                totalCount: Number(headers['x-total-count'] || Environment.ROWS_LIMIT ),
             }
         }
         return new Error("Erro ao buscar pessoas");

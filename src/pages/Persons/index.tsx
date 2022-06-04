@@ -35,7 +35,6 @@ export const Persons: React.FC = () => {
                     if(result instanceof Error){
                         alert(result.message);
                     }else{
-                        console.log(result);
                         setRows(result.data);
                         setTotalCount(result.totalCount);
                     }
@@ -100,7 +99,7 @@ export const Persons: React.FC = () => {
                         ))}
                    </TableBody>
                    {totalCount===0 && !isLoading && (
-                       <caption>{Environment.LISTAGEM_VAZIA}</caption>
+                       <caption>{Environment.EMPTY_LISTING}</caption>
                    )}
                    <TableFooter>
                        {isLoading && (
@@ -110,12 +109,12 @@ export const Persons: React.FC = () => {
                                 </TableCell>
                             </TableRow>
                         )}
-                       {(totalCount>0 && totalCount > Environment.LIMITE_DE_LINHAS) && (
+                       {(totalCount>0 && totalCount > Environment.ROWS_LIMIT ) && (
                             <TableRow>
                                  <TableCell colSpan={3}> 
                                     <Pagination 
                                         page={page}
-                                        count={Math.ceil(totalCount/ Environment.LIMITE_DE_LINHAS)} 
+                                        count={Math.ceil(totalCount/ Environment.ROWS_LIMIT )} 
                                         onChange={(e,newPage)=> setSearchParams({search,page:newPage.toString()},{replace:true})}
                                     />
                                 </TableCell>

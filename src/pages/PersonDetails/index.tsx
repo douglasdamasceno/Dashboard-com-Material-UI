@@ -16,7 +16,7 @@ interface IFormData {
 
 export const PersonDetails: React.FC = () => {
     
-    const {formRef} = useVForm();
+    const {formRef, save, saveAndClose, isSaveAndClose } = useVForm();
 
     const {id ='nova'} = useParams<'id'>();
     const navigate = useNavigate();
@@ -46,8 +46,11 @@ export const PersonDetails: React.FC = () => {
                     if(result instanceof Error){
                         alert(result.message);
                     }else{
-                        alert('Created');
-                        navigate(`/pessoas/detalhe/${result}`);
+                        if(isSaveAndClose()){
+                            navigate('/pessoas');
+                        }else{
+                            navigate(`/pessoas/detalhe/${result}`);
+                        }
                     }
                 }).finally(()=>setIsLoading(false));
        }else{
@@ -58,7 +61,10 @@ export const PersonDetails: React.FC = () => {
                         alert(result.message);
                     }else{
                         alert('Updated');
-                        navigate('/pessoas');
+                        // navigate('/pessoas');
+                        if(isSaveAndClose()){
+                            navigate('/pessoas');
+                        }
                     }
                 }).finally(()=>setIsLoading(false));
        }
@@ -97,8 +103,8 @@ export const PersonDetails: React.FC = () => {
                     onBackButtonClick={()=> navigate('/pessoas')}
                     onNewButtonClick={()=> navigate('/pessoas/nova')}
                     onDeleteButtonClick={()=> handleDelete(Number(id))}
-                    onSaveButtonClick={()=> formRef.current?.submitForm()}
-                    onSaveAndCloseButtonClick={()=> formRef.current?.submitForm()}
+                    onSaveButtonClick={save}
+                    onSaveAndCloseButtonClick={saveAndClose}
                 />
             }
             >
