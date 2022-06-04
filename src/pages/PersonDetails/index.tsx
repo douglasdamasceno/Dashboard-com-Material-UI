@@ -1,9 +1,10 @@
 import { LinearProgress,Box, Paper,Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import { DetailTool } from '../../shared/components';
-import { VTextField,VForm, useVForm } from '../../shared/components/forms';
+import { VTextField,VForm, useVForm, IVFormErros } from '../../shared/components/forms';
 import { LayoutBasePage } from '../../shared/layouts';
 import { PersonService } from '../../shared/services/api/PersonService';
 
@@ -13,6 +14,12 @@ interface IFormData {
     email: string;
     cityId: number;
 }
+
+const formValidationSchema : Yup.SchemaOf<IFormData> = Yup.object().shape({
+    name: Yup.string().required(),
+    email: Yup.string().email().required(),
+    cityId: Yup.number().required(),
+});
 
 export const PersonDetails: React.FC = () => {
     
@@ -38,36 +45,47 @@ export const PersonDetails: React.FC = () => {
                 });
         }
     }
-    const handleSave = (dados:IFormData) => {
-        setIsLoading(true);
-       if(id==='nova'){
-            PersonService.create(dados)
-                .then(result=>{
-                    if(result instanceof Error){
-                        alert(result.message);
-                    }else{
-                        if(isSaveAndClose()){
-                            navigate('/pessoas');
-                        }else{
-                            navigate(`/pessoas/detalhe/${result}`);
-                        }
-                    }
-                }).finally(()=>setIsLoading(false));
-       }else{
-            setIsLoading(true);
-            PersonService.updateById(Number(id),{id:Number(id),...dados})
-                .then(result=>{
-                    if(result instanceof Error){
-                        alert(result.message);
-                    }else{
-                        alert('Updated');
-                        // navigate('/pessoas');
-                        if(isSaveAndClose()){
-                            navigate('/pessoas');
-                        }
-                    }
-                }).finally(()=>setIsLoading(false));
-       }
+    const handleSave = (data:IFormData) => {
+
+        formValidationSchema.validate(data, {abortEarly: false})
+            .then((dataValidation)=>{
+                setIsLoading(true);
+                if(id==='nova'){
+                     PersonService.create(dataValidation)
+                         .then(result=>{
+                             if(result instanceof Error){
+                                 alert(result.message);
+                             }else{
+                                 if(isSaveAndClose()){
+                                     navigate('/pessoas');
+                                 }else{
+                                     navigate(`/pessoas/detalhe/${result}`);
+                                 }
+                             }
+                         }).finally(()=>setIsLoading(false));
+                }else{
+                     setIsLoading(true);
+                     PersonService.updateById(Number(id),{id:Number(id),...dataValidation})
+                         .then(result=>{
+                             if(result instanceof Error){
+                                 alert(result.message);
+                             }else{
+                                 alert('Updated');
+                                 if(isSaveAndClose()){
+                                     navigate('/pessoas');
+                                 }
+                             }
+                         }).finally(()=>setIsLoading(false));
+                }
+            })
+            .catch((errors:Yup.ValidationError)=>{
+                const validationErrors : IVFormErros ={};
+                errors.inner.forEach(error  => {
+                    if(!error.path) return;
+                    validationErrors[error.path] = error.message;
+                });
+                formRef.current?.setErrors(validationErrors);
+            });
     }
 
     useEffect(() => {
@@ -139,15 +157,6 @@ export const PersonDetails: React.FC = () => {
                                     placeholder='Email' 
                                     name='email'
                                     label='Email'
-                                    fullWidth 
-                                    disabled={isLoading}
-                                    />
-                            </Grid>
-                            <Grid item xs={12} md={6}>
-                                <VTextField 
-                                    placeholder='Email2' 
-                                    name='email2'
-                                    label='Email2'
                                     fullWidth 
                                     disabled={isLoading}
                                     />
