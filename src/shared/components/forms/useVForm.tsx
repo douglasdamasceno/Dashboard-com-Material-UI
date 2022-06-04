@@ -1,7 +1,7 @@
+import { FormHandles } from "@unform/core";
 import { useRef } from "react";
-import { VFormHandles } from "./VFormHandles";
 
 export const useVForm = () => {
-    const formRef = useRef<VFormHandles>(null);
+    const formRef = useRef<FormHandles>(null);
     return {formRef};
 }
