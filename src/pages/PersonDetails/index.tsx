@@ -1,8 +1,9 @@
-import { LinearProgress } from '@mui/material';
+import { LinearProgress,Box, Paper,Grid, Typography } from '@mui/material';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { DetailTool } from '../../shared/components';
 import { VTextField } from '../../shared/components/forms/VTextField';
 import { LayoutBasePage } from '../../shared/layouts';
@@ -101,12 +102,64 @@ export const PersonDetails: React.FC = () => {
                 />
             }
             >
-            {isLoading && <LinearProgress variant='indeterminate' />}   
+            
             <Form ref={formRef} onSubmit={handleSave}>
-                <VTextField placeholder='Nome' name='name' />
-                <VTextField placeholder='Email' name='email' />
-                <VTextField placeholder='Cidade id' name='cityId' />
-
+                <Box margin={1} display='flex' flexDirection='column' component={Paper} variant='outlined'> 
+                    <Grid container direction="column" padding={2} spacing={2}>
+                        {
+                            isLoading &&
+                            <Grid item xs={12}>
+                                <LinearProgress variant='indeterminate' />
+                            </Grid>
+                        }
+                        <Grid item xs={12}>
+                            <Typography variant='h6'>Geral</Typography>
+                        </Grid>
+                        <Grid container item direction='row' spacing={2}>
+                            <Grid item xs={12} sm={12} md={12} lg={8} xl={8}>
+                                <VTextField 
+                                    placeholder='Nome' 
+                                    name='name'
+                                    label='Nome'
+                                    fullWidth 
+                                    disabled={isLoading}
+                                    onChange={(e)=>setPersonsName(e.target.value)}
+                                    />
+                            </Grid>
+                        </Grid>
+                        <Grid container item direction='row' spacing={2}>
+                            <Grid item xs={12} md={6}>
+                                <VTextField 
+                                    placeholder='Email' 
+                                    name='email'
+                                    label='Email'
+                                    fullWidth 
+                                    disabled={isLoading}
+                                    />
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <VTextField 
+                                    placeholder='Email2' 
+                                    name='email2'
+                                    label='Email2'
+                                    fullWidth 
+                                    disabled={isLoading}
+                                    />
+                            </Grid>
+                        </Grid>
+                        <Grid container item direction='row' spacing={2}>
+                            <Grid item xs={6}>
+                                <VTextField 
+                                    placeholder='Cidade id'
+                                     name='cityId'
+                                     label='Cidade'
+                                     fullWidth 
+                                     disabled={isLoading}
+                                     />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Box>
             </Form>
         </LayoutBasePage>
     );
