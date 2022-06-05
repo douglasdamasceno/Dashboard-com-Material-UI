@@ -4,7 +4,7 @@
       "id": 1,
       "name": "João Doe Maria",
       "email": "joao@gmail.com",
-      "cityId": 20
+      "cityId": 2
     },
     {
       "id": 2,
@@ -16,31 +16,25 @@
       "id": 3,
       "name": "Maria Doe",
       "email": "maria@gmail.com",
-      "cityId": 30
+      "cityId": 5
     },
     {
       "id": 6,
       "name": "João 6",
       "email": "joao@gmail.com",
-      "cityId": 20
+      "cityId": 4
     },
     {
       "id": 7,
       "name": "Glaucio 7",
       "email": "glaucio@gmail.com",
-      "cityId": 25
-    },
-    {
-      "id": 8,
-      "name": "Maria 8",
-      "email": "maria@gmail.com",
-      "cityId": 30
+      "cityId": 4
     },
     {
       "id": 9,
       "name": "Douglas 9",
       "email": "douglas@gmail.com",
-      "cityId": 17
+      "cityId": 6
     },
     {
       "id": 12,
@@ -53,6 +47,18 @@
       "cityId": 222,
       "email": "22@ffff.boooo",
       "name": "22"
+    },
+    {
+      "id": 14,
+      "name": "AD",
+      "email": "douglasmdamasceno@gmail.com",
+      "cityId": 3
+    },
+    {
+      "name": "Antonio Douglas Monteiro Damasceno",
+      "email": "douglasmdamasceno@gmail.com",
+      "cityId": 3,
+      "id": 15
     }
   ],
   "cidades": [
@@ -62,23 +68,27 @@
     },
     {
       "id": 2,
-      "name": "Quixadá zss"
+      "name": "Quixadá"
     },
     {
-      "name": "novoa",
-      "id": 3
+      "id": 3,
+      "name": "Fortaleza"
     },
     {
-      "name": "ssss",
+      "name": "São Paulo",
       "id": 4
     },
     {
-      "name": "ssss",
+      "name": "São Miguel",
       "id": 5
     },
     {
-      "name": "aaaa",
+      "name": "Santos",
       "id": 6
+    },
+    {
+      "name": "Santosss",
+      "id": 7
     }
   ]
 }

@@ -7,6 +7,7 @@ import { DetailTool } from '../../shared/components';
 import { VTextField,VForm, useVForm, IVFormErros } from '../../shared/components/forms';
 import { LayoutBasePage } from '../../shared/layouts';
 import { PersonService } from '../../shared/services/api/PersonService';
+import AutoCompleteCities from '../Persons/components/AutoCompleteCities';
 
 
 interface IFormData {
@@ -104,7 +105,7 @@ export const PersonDetails: React.FC = () => {
                 setIsLoading(false);
             });
         }else{
-            formRef.current?.setData({name:'',email:'',cityId:''});
+            formRef.current?.setData({name:'',email:'',cityId:undefined});
         }
     },[id]);
 
@@ -164,13 +165,7 @@ export const PersonDetails: React.FC = () => {
                         </Grid>
                         <Grid container item direction='row' spacing={2}>
                             <Grid item xs={6}>
-                                <VTextField 
-                                    placeholder='Cidade id'
-                                     name='cityId'
-                                     label='Cidade'
-                                     fullWidth 
-                                     disabled={isLoading}
-                                     />
+                                   <AutoCompleteCities isExternalLoading={isLoading} />
                             </Grid>
                         </Grid>
                     </Grid>

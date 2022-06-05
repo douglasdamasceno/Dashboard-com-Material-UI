@@ -1,12 +1,12 @@
 import { useCallback, useRef } from "react";
 /**
  * @param delay informe o tempo de delay em milisegundos,
- * valor padrão ```300ms```.
+ * valor padrão ```800ms```.
  * @param notDelayInFirstTime informe se o delay não deve ser aplicado na primeira vez que o componente é renderizado,
  * valor padrão ```true```.
  * @returns retorno void.
  */
-export const useDebounce = (delay=300,notDelayInFirstTime=true)=>{
+export const useDebounce = (delay=800,notDelayInFirstTime=true)=>{
     const isFirstTime = useRef(notDelayInFirstTime);
     const debouncing = useRef<NodeJS.Timeout>();
 
