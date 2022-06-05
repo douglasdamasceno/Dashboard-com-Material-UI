@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import {useDrawerContext} from '../shared/contexts';
 import { useEffect } from "react";
-import {  Cities, Dashboard, Persons, PersonDetails } from "../pages";
+import {  Cities, CityDetails, Dashboard, Persons, PersonDetails } from "../pages";
 
 
 export default function AppRoute(){
@@ -33,6 +33,9 @@ export default function AppRoute(){
         <Routes>
             <Route path="/pagina-inicial" element={<Dashboard />}/>
             <Route path="/cidades" element={<Cities />}/>
+            <Route path="/cidades/detalhe/:id" element={<CityDetails />}/>
+            <Route path="/cidades/nova" element={<CityDetails />}/>
+
             <Route path="/pessoas" element={<Persons />}/>
             <Route path="/pessoas/detalhe/:id" element={<PersonDetails />}/>
             <Route path="/pessoas/nova" element={<PersonDetails />}/>

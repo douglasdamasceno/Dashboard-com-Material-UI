@@ -54,5 +54,31 @@
       "email": "22@ffff.boooo",
       "name": "22"
     }
+  ],
+  "cidades": [
+    {
+      "id": 1,
+      "name": "Quixeramobim"
+    },
+    {
+      "id": 2,
+      "name": "Quixadá zss"
+    },
+    {
+      "name": "novoa",
+      "id": 3
+    },
+    {
+      "name": "ssss",
+      "id": 4
+    },
+    {
+      "name": "ssss",
+      "id": 5
+    },
+    {
+      "name": "aaaa",
+      "id": 6
+    }
   ]
 }
