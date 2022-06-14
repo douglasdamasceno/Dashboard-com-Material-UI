@@ -38,33 +38,21 @@
     },
     {
       "id": 12,
-      "name": "xxxxssssss",
-      "email": "xxxsss",
-      "cityId": "12"
-    },
-    {
-      "id": 13,
-      "cityId": 222,
-      "email": "22@ffff.boooo",
-      "name": "22"
-    },
-    {
-      "id": 14,
-      "name": "AD",
-      "email": "douglasmdamasceno@gmail.com",
+      "name": "Mair",
+      "email": "maria@gmail.com",
       "cityId": 3
     },
     {
-      "name": "Antonio Douglas Monteiro Damasceno",
-      "email": "douglasmdamasceno@gmail.com",
-      "cityId": 3,
-      "id": 15
+      "id": 13,
+      "name": "Juca",
+      "email": "22@ffff.boooo",
+      "cityId": 5
     },
     {
-      "name": "Antonio Douglas Monteiro Damasceno",
-      "email": "douglasmdamasceno@gmail.com",
-      "cityId": 3,
-      "id": 16
+      "id": 14,
+      "name": "André",
+      "email": "André@gmail.com",
+      "cityId": 3
     }
   ],
   "cidades": [
